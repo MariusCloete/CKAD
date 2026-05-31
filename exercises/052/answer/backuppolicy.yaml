@@ -1,0 +1,11 @@
+apiVersion: ops.example.com/v1
+kind: BackupPolicy
+metadata:
+  name: daily-backup
+  namespace: default
+spec:
+  schedule: "0 1 * * *"
+  retentionDays: 7
+  targetRef:
+    name: orders-db
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: port-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: port-demo
+  template:
+    metadata:
+      labels:
+        app: port-demo
+    spec:
+      containers:
+        - name: app
+          image: hashicorp/http-echo:1.0
+          args:
+            - -text=hello
+          ports:
+            - containerPort: 5678
+

@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-stable
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: payments
+      track: stable
+  template:
+    metadata:
+      labels:
+        app: payments
+        track: stable
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+

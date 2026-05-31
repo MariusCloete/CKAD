@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payments-canary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payments
+      track: canary
+  template:
+    metadata:
+      labels:
+        app: payments
+        track: canary
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.27.1
+          ports:
+            - containerPort: 80
+

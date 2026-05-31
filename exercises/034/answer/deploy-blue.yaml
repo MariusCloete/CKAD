@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-blue
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: shop
+      version: blue
+  template:
+    metadata:
+      labels:
+        app: shop
+        version: blue
+    spec:
+      containers:
+        - name: web
+          image: nginx:1.27
+          ports:
+            - containerPort: 80
+

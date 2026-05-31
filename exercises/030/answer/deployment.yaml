@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-app
+  template:
+    metadata:
+      labels:
+        app: notes-app
+    spec:
+      containers:
+        - name: app
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - echo started >> /data/app.log && sleep 3600
+          volumeMounts:
+            - name: data
+              mountPath: /data
+            - name: cache
+              mountPath: /tmp/cache
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: notes-pvc
+        - name: cache
+          emptyDir: {}
+

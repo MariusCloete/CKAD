@@ -1,5 +1,5 @@
 ```bash 
-kubectl create configmap app-config --from-literal=APP_ENV=production --from-literal=APP_DEBUG=false
+kubectl create configmap app-config --from-z``=APP_ENV=production --from-literal=APP_DEBUG=false
 ```
 *add commands "env && sleep 3600"*
 - **env**: Print all environment variables in the container, allowing you to verify that the APP_ENV and APP_DEBUG variables have been correctly set from the ConfigMap.
