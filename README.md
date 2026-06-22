@@ -38,3 +38,18 @@ Understand Application Security (SecurityContexts, Capabilities, etc.)
 - Demonstrate basic understanding of NetworkPolicies
 Provide and troubleshoot access to applications via services
 Use Ingress rules to expose applications
+
+
+
+** Script to export in the exam **
+```bash
+export test="kubectl run test --image=nginx:alpine --rm -i --restart=Never"
+export out=" --dry-run=client -o yaml "
+```
+
+** VI commands **
+
+"Shift v" to select multiple lines in visual mode
+" set nu " to show line numbers
+"uu" to undo
+

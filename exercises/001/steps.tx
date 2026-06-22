@@ -1,2 +1,0 @@
-docker build -t myregistry.local:5000/myapp:latest .
-docker push myapp:latest

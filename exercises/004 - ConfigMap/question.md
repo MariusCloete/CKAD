@@ -1,4 +1,5 @@
-# ⚙️ Create a Kubernetes ConfigMap and Pod
+# ⚙️ Create a Kubernetes ConfigMap and Pod 
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
 
 Create a ConfigMap named `app-config` with the following key-value pairs:
 - `APP_ENV=production`
