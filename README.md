@@ -48,8 +48,31 @@ export out=" --dry-run=client -o yaml "
 ```
 
 ** VI commands **
-
 "Shift v" to select multiple lines in visual mode
 " set nu " to show line numbers
 "uu" to undo
+Select text with "shift+v" and then ">" to indent or "<" to unindent
+To find a word use "/" and then type the word and press enter.
+
+** kubectl expain **
+The kubectl explain command is your built-in documentation tool for any Kubernetes resource or field. Here are some practical examples:
+Basic resource explanation
+```bash
+kubectl explain pod
+kubectl explain deployment
+kubectl explain service
+kubectl explain <resource> --recursive
+```
+Drill into specific fields
+```bash
+kubectl explain pod.spec
+kubectl explain pod.spec.containers
+kubectl explain pod.spec.containers.resources
+kubectl explain deployment.spec.template.spec
+```
+
+
+
+
+
 

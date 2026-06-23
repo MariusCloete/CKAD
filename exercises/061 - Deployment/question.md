@@ -4,7 +4,7 @@ Create a workload with these requirements:
 
 - Create a `Deployment` named `web-clusterip` using image `nginx:1.27`
 - Run `2` replicas
-- Label Pods with `app=web-clusterip`
+- Label Pods with `release=development`
 - Create a `Service` named `web-clusterip-svc`
 - Service type must be `ClusterIP`
 - Expose port `80` to container port `80`
