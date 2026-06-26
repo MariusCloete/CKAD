@@ -1,0 +1,23 @@
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    app: home
+  name: home
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: home
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: home
+    spec:
+      containers:
+        - image: nginx:latest
+          name: nginx
+          resources: {}
+status: {}

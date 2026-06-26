@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-pod
+  namespace: app-namespace
+spec:
+  serviceAccountName: app-reader
+  containers:
+  - name: app
+    image: busybox:1.36
+    command: ["sh", "-c"]
+    args:
+      - |
+        echo "ServiceAccount: $(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)"
+        echo "Token exists: $(test -f /var/run/secrets/kubernetes.io/serviceaccount/token && echo 'yes' || echo 'no')"
+        sleep 3600
+

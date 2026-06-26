@@ -1,0 +1,25 @@
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: batch
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: batch
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+            - command:
+                - sh
+                - -c
+                - echo 'Running batch job'
+              image: busybox:latest
+              name: batch
+              resources: {}
+          restartPolicy: OnFailure
+  schedule: 0 0 * * *
+status: {}

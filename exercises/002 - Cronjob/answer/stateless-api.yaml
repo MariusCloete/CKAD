@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: stateless-api
+  name: stateless-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: stateless-api
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: stateless-api
+    spec:
+      containers:
+        - image: node:18-alpine
+          name: node
+          resources: {}
+status: {}

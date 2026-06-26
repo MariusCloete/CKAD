@@ -36,10 +36,10 @@ Under resources, you can add the environment variables from the ConfigMap like t
   containers:
   - image: busybox
     name: app-pod
+    resources: {}
     envFrom:
     - configMapRef:
         name: app-config
-    resources: {}
 ```
 NB: The `envFrom` field allows you to import all key-value pairs from the specified ConfigMap as environment variables in the container.
 If you want to specify each environment variable individually, you can use the `env` field instead:

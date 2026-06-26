@@ -68,7 +68,7 @@ Drill into specific fields
 kubectl explain pod.spec
 kubectl explain pod.spec.containers
 kubectl explain pod.spec.containers.resources
-kubectl explain deployment.spec.template.spec
+kubectl explain deployment.spec.template.spec.containers
 ```
 
 

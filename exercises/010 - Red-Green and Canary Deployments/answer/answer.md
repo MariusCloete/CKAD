@@ -23,7 +23,7 @@ Canary Deployment: Gradually rolls out the new version to a small subset of user
          - protocol: TCP
             port: 80
             targetPort: 8080
-      # Route 10% of traffic to the canary deployment
+      # Route 10% of traffic to the canary deployment maintain session affinity to ensure users are consistently routed to the same version
       sessionAffinity: ClientIP
       externalTrafficPolicy: Local
     ```

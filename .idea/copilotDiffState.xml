@@ -3,6 +3,111 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
+        <entry key="$PROJECT_DIR$/exercises/012 - Secrets/answer/pod.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/012 - Secrets/answer/pod.yaml" />
+              <option name="originalContent" value="apiVersion: v1&#10;kind: Pod&#10;metadata:&#10;  name: secret-pod&#10;spec:&#10;  containers:&#10;    - name: app&#10;      image: nginx&#10;      env:&#10;        - name: USERNAME&#10;          valueFrom:&#10;            secretKeyRef:&#10;              name: my-secret&#10;              key: username&#10;        - name: PASSWORD&#10;          valueFrom:&#10;            secretKeyRef:&#10;              name: my-secret&#10;              key: password" />
+              <option name="updatedContent" value="apiVersion: v1&#13;&#10;kind: Pod&#13;&#10;metadata:&#13;&#10;  name: secret-consumer&#13;&#10;spec:&#13;&#10;  containers:&#13;&#10;    - name: app&#13;&#10;      image: busybox:1.36&#13;&#10;      command: [&quot;sh&quot;, &quot;-c&quot;]&#13;&#10;      args:&#13;&#10;        - |&#13;&#10;          echo &quot;DB: $DB_URL&quot;&#13;&#10;          echo &quot;API: $API_KEY&quot;&#13;&#10;          sleep 3600&#13;&#10;      env:&#13;&#10;        - name: DB_URL&#13;&#10;          valueFrom:&#13;&#10;            secretKeyRef:&#13;&#10;              name: app-secret&#13;&#10;              key: database_url&#13;&#10;        - name: API_KEY&#13;&#10;          valueFrom:&#13;&#10;            secretKeyRef:&#13;&#10;              name: app-secret&#13;&#10;              key: api_key" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/012 - Secrets/answer/secret.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/012 - Secrets/answer/secret.yaml" />
+              <option name="updatedContent" value="apiVersion: v1&#10;kind: Secret&#10;metadata:&#10;  name: app-secret&#10;type: Opaque&#10;stringData:&#10;  database_url: postgres://localhost:5432/mydb&#10;  api_key: secret-api-key-123&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/071 - StorageClass/answer/deployment.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/071 - StorageClass/answer/deployment.yaml" />
+              <option name="updatedContent" value="apiVersion: apps/v1&#10;kind: Deployment&#10;metadata:&#10;  name: data-app&#10;spec:&#10;  replicas: 1&#10;  selector:&#10;    matchLabels:&#10;      app: data-app&#10;  template:&#10;    metadata:&#10;      labels:&#10;        app: data-app&#10;    spec:&#10;      containers:&#10;      - name: nginx&#10;        image: nginx:1.27&#10;        ports:&#10;        - containerPort: 80&#10;        volumeMounts:&#10;        - name: data-volume&#10;          mountPath: /data&#10;      volumes:&#10;      - name: data-volume&#10;        persistentVolumeClaim:&#10;          claimName: app-data-pvc&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/071 - StorageClass/answer/pvc.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/071 - StorageClass/answer/pvc.yaml" />
+              <option name="updatedContent" value="apiVersion: v1&#10;kind: PersistentVolumeClaim&#10;metadata:&#10;  name: app-data-pvc&#10;spec:&#10;  storageClassName: fast-storage&#10;  accessModes:&#10;    - ReadWriteOnce&#10;  resources:&#10;    requests:&#10;      storage: 2Gi&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/071 - StorageClass/answer/storageclass.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/071 - StorageClass/answer/storageclass.yaml" />
+              <option name="updatedContent" value="apiVersion: storage.k8s.io/v1&#10;kind: StorageClass&#10;metadata:&#10;  name: fast-storage&#10;provisioner: kubernetes.io/no-provisioner&#10;volumeBindingMode: WaitForFirstConsumer&#10;allowVolumeExpansion: true&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/071 - StorageClass/question.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/071 - StorageClass/question.md" />
+              <option name="updatedContent" value="# Question 71: Create a StorageClass and link it to a Pod&#10;&#10;Create a storage setup for an application that requires persistent data:&#10;&#10;- Create a `StorageClass` named `fast-storage` with:&#10;  - `provisioner: kubernetes.io/no-provisioner` (for local/manual provisioning)&#10;  - `volumeBindingMode: WaitForFirstConsumer`&#10;  - `allowVolumeExpansion: true`&#10;&#10;- Create a `PersistentVolumeClaim (PVC)` named `app-data-pvc` that:&#10;  - References the `fast-storage` StorageClass&#10;  - Requests `2Gi` of storage&#10;  - Uses `ReadWriteOnce` access mode&#10;&#10;- Create a Deployment named `data-app` that:&#10;  - Uses image `nginx:1.27`&#10;  - Has `1` replica&#10;  - Mounts the PVC at path `/data`&#10;  - Labels: `app=data-app`&#10;&#10;Save manifests as `storageclass.yaml`, `pvc.yaml`, and `deployment.yaml`, then apply them.&#10;&#10;Verify with:&#10;```bash&#10;kubectl get storageclass&#10;kubectl get pvc&#10;kubectl get pods -o wide&#10;kubectl exec &lt;pod-name&gt; -- ls -la /data&#10;```&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/072 - Set Resources/answer/deployment.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/072 - Set Resources/answer/deployment.yaml" />
+              <option name="updatedContent" value="apiVersion: apps/v1&#10;kind: Deployment&#10;metadata:&#10;  name: web-app&#10;spec:&#10;  replicas: 2&#10;  selector:&#10;    matchLabels:&#10;      app: web-app&#10;  template:&#10;    metadata:&#10;      labels:&#10;        app: web-app&#10;    spec:&#10;      containers:&#10;      - name: nginx&#10;        image: nginx:1.27&#10;        ports:&#10;        - containerPort: 80&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/072 - Set Resources/question.md">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/072 - Set Resources/question.md" />
+              <option name="updatedContent" value="# Question 72: Update Deployment Resource Limits with kubectl set resources&#10;&#10;Update resource limits on a Deployment using `kubectl set resources`:&#10;&#10;- Create a Deployment named `web-app` with:&#10;  - Image `nginx:1.27`&#10;  - `2` replicas&#10;  - Save as `deployment.yaml`&#10;&#10;- Use `kubectl set resources` to update the container limits:&#10;  - CPU limit: `500m`&#10;  - Memory limit: `128Mi`&#10;  - Use `--local --filename=deployment.yaml` to preview changes before applying&#10;  - Output the result as YAML with `-o yaml`&#10;&#10;- Apply the updated configuration to the cluster&#10;&#10;- Verify the resource limits were applied:&#10;  ```bash&#10;  kubectl get deployment web-app -o yaml | grep -A 10 resources:&#10;  kubectl describe deployment web-app&#10;  ```&#10;&#10;**Bonus**: Also set resource **requests** with:&#10;- CPU request: `100m`&#10;- Memory request: `64Mi`&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/073 - RBAC/answer/namespace.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/073 - RBAC/answer/namespace.yaml" />
+              <option name="updatedContent" value="apiVersion: v1&#10;kind: Namespace&#10;metadata:&#10;  name: app-namespace&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/073 - RBAC/answer/pod-bonus.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/073 - RBAC/answer/pod-bonus.yaml" />
+              <option name="updatedContent" value="apiVersion: v1&#10;kind: Pod&#10;metadata:&#10;  name: app-pod&#10;  namespace: app-namespace&#10;spec:&#10;  serviceAccountName: app-reader&#10;  containers:&#10;  - name: app&#10;    image: busybox:1.36&#10;    command: [&quot;sh&quot;, &quot;-c&quot;]&#10;    args:&#10;      - |&#10;        echo &quot;ServiceAccount: $(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace)&quot;&#10;        echo &quot;Token exists: $(test -f /var/run/secrets/kubernetes.io/serviceaccount/token &amp;&amp; echo 'yes' || echo 'no')&quot;&#10;        sleep 3600&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/073 - RBAC/answer/role.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/073 - RBAC/answer/role.yaml" />
+              <option name="updatedContent" value="apiVersion: rbac.authorization.k8s.io/v1&#10;kind: Role&#10;metadata:&#10;  name: pod-reader&#10;  namespace: app-namespace&#10;rules:&#10;- apiGroups: [&quot;&quot;]&#10;  resources: [&quot;pods&quot;]&#10;  verbs: [&quot;get&quot;, &quot;list&quot;, &quot;watch&quot;]&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/073 - RBAC/answer/rolebinding.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/073 - RBAC/answer/rolebinding.yaml" />
+              <option name="updatedContent" value="apiVersion: rbac.authorization.k8s.io/v1&#10;kind: RoleBinding&#10;metadata:&#10;  name: read-pods&#10;  namespace: app-namespace&#10;subjects:&#10;- kind: ServiceAccount&#10;  name: app-reader&#10;  namespace: app-namespace&#10;roleRef:&#10;  kind: Role&#10;  name: pod-reader&#10;  apiGroup: rbac.authorization.k8s.io&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/exercises/073 - RBAC/answer/serviceaccount.yaml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/exercises/073 - RBAC/answer/serviceaccount.yaml" />
+              <option name="updatedContent" value="apiVersion: v1&#10;kind: ServiceAccount&#10;metadata:&#10;  name: app-reader&#10;  namespace: app-namespace&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/exercises/English test/test-one-answers.md">
           <value>
             <PendingDiffInfo>

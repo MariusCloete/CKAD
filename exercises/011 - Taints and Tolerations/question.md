@@ -1,5 +1,5 @@
 # 🖥️ Deploying a Pod to a Specific Node Using Taints and Tolerations
-
+#ToDo: reword this question to be more clear and concise.
 You want to ensure that a Pod is scheduled on a specific node in your Kubernetes cluster. The node has been configured with a taint to restrict scheduling.
 
 1. Explain how taints and tolerations work in Kubernetes.
